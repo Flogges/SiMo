@@ -48,7 +48,8 @@ def find_first_one(lst):
 #n-max is the amount of black squares we occupiy at the most
 #L is the length of one side of the grid 
 
-#dict_size = e_ymax, nmax = is the step, when the grid stops to have squares turn black, 
+#dict_size = e_ymax, nmax = is the step, when the grid stops to have squares turn black,
+# todo : get rid of n_max
 def create_y_vals(dict_size, n_max, L):  
     p_vals = grid_to_p_vals(dict_size, n_max, L)
     Qp = [0]*100
