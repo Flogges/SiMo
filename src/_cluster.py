@@ -19,8 +19,8 @@ class Cluster:
 
 
     # used to tell if cluster percolates
-    col_idx_min: int = -1  # the closer to 0, the closer to top of grid
-    col_idx_max: int = -1  # the closer to (grid.num_cols)-1, the closer to top of grid
+    row_idx_min: int = -1  # the closer to 0, the closer to top of grid
+    row_idx_max: int = -1  # the closer to (grid.num_cols)-1, the closer to top of grid
    # grid: Optional[Grid] = None
 
     # -------------------------------
@@ -32,13 +32,13 @@ class Cluster:
     def num_cells(self) -> int:
         return len(self.cells)
     # -------------------------------
-    def percolates(self, grid: 'Grid') -> bool:
+    def percolates(self) -> bool:
         """ does cluster extend from top to ottom of grid? """
         if self.grid is None:
             return False
 
-        touches_top = self.col_idx_max == 0
-        touches_bottom =  self.col_idx_max == (self.grid.num_rows-1)
+        touches_top = self.row_idx_min == 0
+        touches_bottom =  self.row_idx_max == (self.grid.num_rows-1)
 
         return touches_top and touches_bottom
 
@@ -54,10 +54,10 @@ class Cluster:
         if Cell is None:
             return
 
-        if cell.col_idx < self.col_idx_min:
-            self.col_idx_min = cell.col_idx
+        if (self.row_idx_min <0) or (self.row_idx_min > cell.col_idx) :
+            self.row_idx_min = cell.col_idx
 
-        if cell.col_idx > self.col_idx_max:
-            self.col_idx_max = cell.col_idx
+        if (self.row_idx_max <0) or (self.row_idx_max < cell.row_idx) :
+            self.row_idx_max = cell.row_idx
 
 # -------------------------------
