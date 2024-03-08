@@ -1,11 +1,15 @@
 
 
 from typing import Optional
-#import importlib
 
-# At the module level, dynamically import the Cluster class from _cluster.py
-#Cluster = importlib.import_module('._cluster', package='src').Cluster
-#Cluster = importlib.import_module("._cluster" , package='src')
+
+# keep mypy happy, without actually importing (and thereby creating circular dependency  cluster <-> cell)
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+     from ._cluster import Cluster
+     # if needs be could ue syntax like this locally
+     # import importlib
+     # Cluster = importlib.import_module('._cluster', package='src').Cluster
 
 
 class Cell:
@@ -15,7 +19,7 @@ class Cell:
     col_idx:    int = -1      # ~x-coordinate
     row_idx:    int  = -1     # ~y-coordinate
     is_black:   bool = False
-   # cluster:    Optional[Cluster] = None
+    cluster:    'Optional[Cluster]' = None
 
     # -------------------------------
     def __init__(self, col_idx, row_idx, is_black=False):

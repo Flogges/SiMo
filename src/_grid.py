@@ -25,7 +25,7 @@ class Grid:
             for col_idx in range(num_cols):
                 cell = Cell(col_idx, row_idx)
                 row.append(cell)
-            self.rows.append(Row)
+            self.rows.append(row)
 
     # -------------------------------
     def cell_at(self, col_idx: int, row_idx: int) -> Optional[Cell]:
@@ -47,5 +47,5 @@ class Grid:
 
         if (col_idx > len(row)):
             return None
-        Cell = row[col_idx]
-        return Cell
+        cell = row[col_idx]
+        return cell

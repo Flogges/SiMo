@@ -1,10 +1,9 @@
-from ._cell import Cell
+# from ._cell import Cell
 
 from typing import Set
-from typing import Optional
+from ._cell import Cell
 
-# import importlib
-#Grid = importlib.import_module("._grid" , package='src')
+
 
 class Cluster:
     """ Full islands (not subsets thereof) of black cells """
