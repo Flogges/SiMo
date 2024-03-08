@@ -14,8 +14,6 @@ def test_cell_picker_seq_random():
     picker = CellPicker(num_rows, num_cols)
     seq = picker.seq_random(deterministic=False)
 
-
-
     uniq_vals = set(seq)
     uniq_cnt = len(uniq_vals)
     assert uniq_cnt == (num_rows * num_cols), "expect all values chosen exactly once"
@@ -29,3 +27,16 @@ def test_cell_picker_seq_random():
     # plot the sequence in colors reqpresenting sequence order
     visualize_grid_sequence(num_rows, num_cols, seq)
 # --------------------------------------------
+
+
+def test_cell_stepper():
+    """ turn cells black in random order """
+
+    num_rows = 5
+    num_cols = 6
+    grid = Grid(num_rows, num_cols)
+    seq = CellPicker(num_rows, num_cols).seq_random()
+
+    for (row_idx, col_idx) in seq:
+        cell = grid.cell_at(row_idx, col_idx)
+        cell.turn_black()
