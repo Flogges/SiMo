@@ -16,8 +16,8 @@ class Cell:
     """ Smallest individual 'unit' of a grid. Has indices (x,y) and color"""
 
     # ---------------------------------------------------------
-    col_idx:    int = -1      # ~x-coordinate
     row_idx:    int = -1     # ~y-coordinate
+    col_idx:    int = -1      # ~x-coordinate
     is_black:   bool = False
     cluster:    'Optional[Cluster]' = None
 
