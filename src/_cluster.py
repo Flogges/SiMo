@@ -13,6 +13,7 @@ class Cluster:
 
     cells : Set[Cell] = set()   # using set (instead of eg List) stops duplicates from being added (by mistake)
 
+
     # used to tell if cluster percolates
     col_idx_min: int = -1  # the closer to 0, the closer to top of grid
     col_idx_max: int = -1  # the closer to (grid.num_cols)-1, the closer to top of grid
@@ -23,6 +24,9 @@ class Cluster:
     #   self.grid = grid
         pass
 
+    # -------------------------------
+    def num_cells(self) -> int:
+        return len(self.cells)
     # # -------------------------------
     # def percolates(self, grid: Grid) -> bool:
     #     """ does cluster extend from top to ottom of grid? """

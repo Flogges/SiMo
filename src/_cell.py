@@ -18,9 +18,10 @@ class Cell:
    # cluster:    Optional[Cluster] = None
 
     # -------------------------------
-    def __init__(self, col_idx, row_idx):
+    def __init__(self, col_idx, row_idx, is_black=False):
         self.col_idx = col_idx
         self.row_idx = row_idx
+        self.is_black = is_black
 
 # -------------------------------
 #from ._cluster import Cluster

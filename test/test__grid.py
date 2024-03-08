@@ -4,7 +4,7 @@ from src._grid import Grid
 
 # --------------------------------------------
 def test_grid_create():
-    """ test test_grid creation() """
+    """ test grid creation() """
 
     grid = Grid(num_rows= 3, num_cols= 3)
 
