@@ -1,9 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
+import matplotlib.patches as patches
 
 from typing import List, Tuple
-
+from src._grid import Grid
+from src._cell import Cell
+# -------------------------------------
 def visualize_grid_sequence(num_rows, num_cols, sequence):
     """
     Visualizes the order of cells in the sequence, using a color map.
@@ -62,3 +65,39 @@ def plot_grid_with_adjacent(num_rows, num_cols, row_idx, col_idx, adjacent_cells
     plt.tick_params(axis='both', which='both', length=0, labelbottom=False, labelleft=False)
 
     plt.show()
+# -------------------------------------
+def visualize_grid_clusters(grid: Grid):
+
+        def color_cell(ax, cell: Cell, color):
+            # Assuming cell has row and col attributes
+            rect = patches.Rectangle((cell.col_idx, cell.row_idx), 1, 1, linewidth=0, edgecolor='black', facecolor=color)
+            ax.add_patch(rect)
+
+
+        # Initialize a white grid
+        fig, ax = plt.subplots()
+        ax.set_xlim(0, grid.num_cols)
+        ax.set_ylim(0, grid.num_rows)
+        ax.invert_yaxis()  # Invert y axis to have origin at top-left
+
+        # Color mapping
+        for cluster in grid.clusters:
+            for cell in cluster.cells:
+                color = 'yellow' if cluster == grid.perc_cluster else 'blue'
+                if cell == grid.perc_cell:
+                    color = 'green'
+                color_cell(ax, cell, color)
+
+        # Non-cluster cells, assuming you have a way to determine these, are colored white by default
+
+        # Draw grid lines
+        for x in range(grid.num_cols):
+            for y in range(grid.num_rows):
+                rect = patches.Rectangle((x, y), 1, 1, linewidth=1, edgecolor='black', facecolor='none')
+                ax.add_patch(rect)
+
+        # Show steps taken
+        plt.text(0, -1, f'Steps taken: {grid.steps_taken}', fontsize=12)
+
+        plt.axis('off')
+        plt.show()

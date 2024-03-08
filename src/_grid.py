@@ -22,6 +22,9 @@ class Grid:
     perc_cell: Optional[Cell] = None
 
     # -------------------------------
+    def perc_value(self):
+        return float(self.steps_taken)/(float(self.num_cols * self.num_rows))
+    # -------------------------------
     def __init__(self, num_rows, num_cols):
         self.num_rows = num_rows
         self.num_cols = num_cols

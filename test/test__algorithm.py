@@ -1,7 +1,5 @@
 """ Algorithm tests """
 
-from src._cluster import Cluster
-from src._cell import Cell
 from src._grid import Grid
 from src._cell_picker import CellPicker
 from src._grid_visual import visualize_grid_sequence
