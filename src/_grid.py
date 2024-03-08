@@ -15,6 +15,12 @@ class Grid:
     clusters:   Set[Cluster] = set()
     rows:       List[Row] = []
 
+    steps_taken = 0
+    # ----------------------------
+    # if/when percolation occurs, save the cluster responsible, and cell in it that last turned black
+    perc_cluster: Optional[Cluster] = None
+    perc_cell: Optional[Cell] = None
+
     # -------------------------------
     def __init__(self, num_rows, num_cols):
         self.num_rows = num_rows
@@ -107,6 +113,8 @@ class Grid:
         if cell is None:
             return False
 
+        self.steps_taken += 1
+
         cell.turn_black()
         cluster = Cluster(grid=self)
         cluster.add_cell(cell)
@@ -122,8 +130,12 @@ class Grid:
                 cluster_a  = cell_a.cluster
                 self.merge_clusters(cluster, cluster_a)
 
-        ret= cluster.percolates()
-        return ret
+        perc = cluster.percolates()
+        if(perc):
+            self.perc_cluster = cluster
+            self.perc_cell = cell
+
+        return perc
 
     # -------------------------------
     def merge_clusters(self, cla: Cluster, clb: Optional[Cluster]):
@@ -132,6 +144,6 @@ class Grid:
 
         if clb is None:
             return
-        
+
         cla.merge(clb)
         self.clusters.remove(clb)
