@@ -28,8 +28,11 @@ class Grid:
             self.rows.append(row)
 
     # -------------------------------
-    def cell_at(self, col_idx: int, row_idx: int) -> Optional[Cell]:
-        """ return cell at given posn (col_idx,row_idx), or None if invalid"""
+    def cell_at(self, row_idx: int, col_idx: int,) -> Optional[Cell]:
+        """ return cell at given posn (col_idx,row_idx), or None if invalid
+
+         order of indices: (row_idx, col_idx) -not- (col_idx, row_idx)~(x,y)
+         same convention as numpy/pandas """
 
         # check for out of bounds (num_rows, num_cols) of grid
         if row_idx < 0 or (row_idx > self.num_rows):

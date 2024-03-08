@@ -22,7 +22,9 @@ class Cell:
     cluster:    'Optional[Cluster]' = None
 
     # -------------------------------
-    def __init__(self, col_idx, row_idx, is_black=False):
+    def __init__(self, row_idx, col_idx, is_black=False):
+        """ order of indices: (row_idx, col_idx) -not- (col_idx, row_idx)~(x,y)
+           same convention as numpy/pandas """
         self.col_idx = col_idx
         self.row_idx = row_idx
         self.is_black = is_black
