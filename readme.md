@@ -12,21 +12,20 @@
       - black cells are in exactly 1 cluster (possibly of size 1)
       - white cells are in 0 clusters
       
-
-
-- ### Cells
-    -  **Adjacent** 
-        -  if they share an (vertical or horizontal) edge 
-        - sharing a vertex is not sufficient
-        - independent of color
-
-    - **Connected**
-      - _Intuitive_:
-        - in Island of same color
-      - _Rigorous_:
-          - (c1,c2) are connected if there exists a sequence of cells starting with c1 and ending with c2, such that:
-            - all cells in the sequence are same color, and
-            - each pair of consecutive cells in the sequence are adjacent 
+    - #### Terminology:
+      - Cells are
+        -  **Adjacent** 
+            -  if they share an (vertical or horizontal) edge 
+            - sharing a vertex is not sufficient
+            - independent of color
+    
+        - **Connected**
+          - _Intuitive_:
+            - in Island of same color
+          - _Rigorous_:
+              - (c1,c2) are connected if there exists a sequence of cells starting with c1 and ending with c2, such that:
+                - all cells in the sequence are same color, and
+                - each pair of consecutive cells in the sequence are adjacent 
 
 - ### Cluster
     - **Connected black** cells of **maximal** size 
