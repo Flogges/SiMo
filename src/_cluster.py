@@ -1,7 +1,10 @@
 from ._cell import Cell
-from .grid import Grid
+
 from typing import Set
 from typing import Optional
+
+# import importlib
+#Grid = importlib.import_module("._grid" , package='src')
 
 class Cluster:
     """ Full islands (not subsets thereof) of black cells """
@@ -13,22 +16,23 @@ class Cluster:
     # used to tell if cluster percolates
     col_idx_min: int = -1  # the closer to 0, the closer to top of grid
     col_idx_max: int = -1  # the closer to (grid.num_cols)-1, the closer to top of grid
-    grid: Optional[Grid] = None
+   # grid: Optional[Grid] = None
 
     # -------------------------------
-    def __init__(self, grid: Grid):
-        self.grid = grid
+    def __init__(self): #, grid: Grid):
+    #   self.grid = grid
+        pass
 
-    # -------------------------------
-    def percolates(self, grid: Grid) -> bool:
-        """ does cluster extend from top to ottom of grid? """
-        if self.grid is None:
-            return False
-
-        touches_top = self.col_idx_max == 0
-        touches_bottom =  self.col_idx_max == (self.grid.num_rows-1)
-
-        return touches_top and touches_bottom
+    # # -------------------------------
+    # def percolates(self, grid: Grid) -> bool:
+    #     """ does cluster extend from top to ottom of grid? """
+    #     if self.grid is None:
+    #         return False
+    #
+    #     touches_top = self.col_idx_max == 0
+    #     touches_bottom =  self.col_idx_max == (self.grid.num_rows-1)
+    #
+    #     return touches_top and touches_bottom
 
     # -------------------------------
     def add_cell(self, cell: Cell):
@@ -47,3 +51,5 @@ class Cluster:
 
         if cell.col_idx > self.col_idx_max:
             self.col_idx_max = cell.col_idx
+
+# -------------------------------

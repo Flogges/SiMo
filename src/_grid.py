@@ -17,11 +17,11 @@ class Grid:
 
     # -------------------------------
     def __init__(self, num_rows, num_cols):
-        self.rows = num_rows
-        self.cols = num_cols
+        self.num_rows = num_rows
+        self.num_cols = num_cols
 
         for row_idx in range(num_rows):
-            row = Row()
+            row = list()
             for col_idx in range(num_cols):
                 cell = Cell(col_idx, row_idx)
                 row.append(cell)
