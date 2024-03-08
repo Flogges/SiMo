@@ -17,7 +17,7 @@ class Cell:
 
     # ---------------------------------------------------------
     col_idx:    int = -1      # ~x-coordinate
-    row_idx:    int  = -1     # ~y-coordinate
+    row_idx:    int = -1     # ~y-coordinate
     is_black:   bool = False
     cluster:    'Optional[Cluster]' = None
 
@@ -28,4 +28,3 @@ class Cell:
         self.is_black = is_black
 
 # -------------------------------
-#from ._cluster import Cluster

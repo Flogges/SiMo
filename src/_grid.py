@@ -33,19 +33,19 @@ class Grid:
 
         # check for out of bounds (num_rows, num_cols) of grid
         if row_idx < 0 or (row_idx > self.num_rows):
-           return None
+            return None
 
         if col_idx < 0 or (col_idx > self.num_cols):
             return None
         # -------
 
         # check for no cell at given posn
-        if(row_idx > len(self.rows)):
+        if row_idx > len(self.rows):
             return None
         row = self.rows[row_idx]
 
 
-        if (col_idx > len(row)):
+        if col_idx > len(row):
             return None
         cell = row[col_idx]
         return cell

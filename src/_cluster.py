@@ -26,12 +26,12 @@ class Cluster:
 
     # -------------------------------
     def __init__(self, grid: 'Grid'):
-       self.grid = grid
-
+        self.grid = grid
 
     # -------------------------------
     def num_cells(self) -> int:
         return len(self.cells)
+
     # -------------------------------
     def percolates(self) -> bool:
         """ does cluster extend from top to bottom of grid? """
