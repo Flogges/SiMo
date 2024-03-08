@@ -1,6 +1,6 @@
 ## Actors
 - ### Grid 
-     - Matrix of size (rows x cols)
+     - Matrix of size (rows x cols).
      - Each element of the matrix is a cell.  
 
 - ### Cell
