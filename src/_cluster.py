@@ -4,6 +4,11 @@ from typing import Set
 from ._cell import Cell
 
 
+# keep mypy happy, without actually importing (and thereby creating circular dependency  cluster <-> cell)
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+     from ._grid import Grid
+
 
 class Cluster:
     """ Full islands (not subsets thereof) of black cells """
@@ -19,23 +24,23 @@ class Cluster:
    # grid: Optional[Grid] = None
 
     # -------------------------------
-    def __init__(self): #, grid: Grid):
-    #   self.grid = grid
-        pass
+    def __init__(self, grid: 'Grid'):
+       self.grid = grid
+
 
     # -------------------------------
     def num_cells(self) -> int:
         return len(self.cells)
-    # # -------------------------------
-    # def percolates(self, grid: Grid) -> bool:
-    #     """ does cluster extend from top to ottom of grid? """
-    #     if self.grid is None:
-    #         return False
-    #
-    #     touches_top = self.col_idx_max == 0
-    #     touches_bottom =  self.col_idx_max == (self.grid.num_rows-1)
-    #
-    #     return touches_top and touches_bottom
+    # -------------------------------
+    def percolates(self, grid: 'Grid') -> bool:
+        """ does cluster extend from top to ottom of grid? """
+        if self.grid is None:
+            return False
+
+        touches_top = self.col_idx_max == 0
+        touches_bottom =  self.col_idx_max == (self.grid.num_rows-1)
+
+        return touches_top and touches_bottom
 
     # -------------------------------
     def add_cell(self, cell: Cell):
