@@ -1,6 +1,7 @@
 # from ._cell import Cell
 
 from typing import Set
+from typing import Optional
 from ._cell import Cell
 
 
@@ -21,7 +22,7 @@ class Cluster:
     # used to tell if cluster percolates
     row_idx_min: int = -1  # the closer to 0, the closer to top of grid
     row_idx_max: int = -1  # the closer to (grid.num_cols)-1, the closer to top of grid
-   # grid: Optional[Grid] = None
+    grid: 'Optional[Grid]' = None
 
     # -------------------------------
     def __init__(self, grid: 'Grid'):
@@ -33,12 +34,12 @@ class Cluster:
         return len(self.cells)
     # -------------------------------
     def percolates(self) -> bool:
-        """ does cluster extend from top to ottom of grid? """
+        """ does cluster extend from top to bottom of grid? """
         if self.grid is None:
             return False
 
         touches_top = self.row_idx_min == 0
-        touches_bottom =  self.row_idx_max == (self.grid.num_rows-1)
+        touches_bottom = self.row_idx_max == (self.grid.num_rows-1)
 
         return touches_top and touches_bottom
 
