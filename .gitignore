@@ -1,3 +1,3 @@
-/__pycache__/
-/.ipynb_checkpoints/
-/no_git/
+/.mypy_cache/
+/.pytest_cache/
+/tmp/
