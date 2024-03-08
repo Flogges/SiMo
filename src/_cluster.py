@@ -21,7 +21,7 @@ class Cluster:
 
     # -------------------------------
     def percolates(self, grid: Grid) -> bool:
-
+        """ does cluster extend from top to ottom of grid? """
         if self.grid is None:
             return False
 
