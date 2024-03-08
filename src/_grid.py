@@ -1,6 +1,6 @@
 from ._cell import Cell
 from ._cluster import Cluster
-from typing import List, Tuple
+from typing import List, Tuple, Set
 from typing import Optional
 
 Row = List[Cell]  # Alias for List (so we can use eg "List[Row]"  instead of "List[List[Cell]]" )
@@ -12,7 +12,7 @@ class Grid:
     num_rows: int = -1
     num_cols: int = -1
 
-    clusters:   List[Cluster] = []
+    clusters:   Set[Cluster] = set()
     rows:       List[Row] = []
 
     # -------------------------------
@@ -73,7 +73,7 @@ class Grid:
         return ret
 
     # -------------------------------
-    def cell_at(self, row_idx: int, col_idx: int,) -> Optional[Cell]:
+    def cell_at(self, row_idx: int, col_idx: int) -> Optional[Cell]:
         """ return cell at given posn (col_idx,row_idx), or None if invalid
 
          order of indices: (row_idx, col_idx) -not- (col_idx, row_idx)~(x,y)
@@ -97,3 +97,38 @@ class Grid:
             return None
         cell = row[col_idx]
         return cell
+
+    # -------------------------------
+    def step(self, row_idx: int, col_idx: int) -> bool:
+        """ turn cell at given posn (col_idx,row_idx) black, merge any clusters.
+         return whether true if percolation has occured in this step """
+
+        cell = self.cell_at(row_idx, col_idx)
+        if cell is None:
+            return False
+
+        cell.turn_black()
+        cluster = Cluster(grid=self)
+        cluster.add_cell(cell)
+        self.clusters.add(cluster)
+
+
+        adjacent_cells = self.cells_adjacent_to(row_idx, col_idx)
+        if adjacent_cells is None:
+            return False
+
+        for cell_a in adjacent_cells:
+            if cell_a.is_black:
+                cluster_a = cell_a.cluster
+                self.merge_clusters(cluster, cluster_a)
+
+        ret= cluster.percolates()
+        return ret
+
+    # -------------------------------
+    def merge_clusters(self, cla: Cluster, clb: Cluster):
+        """ merge any clusters.
+         return whether true if percolation has occured in this step """
+
+        cla.merge(clb)
+        self.clusters.remove(clb)

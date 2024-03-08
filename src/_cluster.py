@@ -8,7 +8,7 @@ from ._cell import Cell
 # keep mypy happy, without actually importing (and thereby creating circular dependency  cluster <-> cell)
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-     from ._grid import Grid
+        from ._grid import Grid
 
 
 class Cluster:
@@ -45,14 +45,14 @@ class Cluster:
 
     # -------------------------------
     def add_cell(self, cell: Cell):
-        if (Cell is not None) and (cell.is_black):
+        if (cell is not None) and (cell.is_black):
             self.cells.add(cell)
             self.update_col_idx(cell)
 
     # -------------------------------
     def update_col_idx(self, cell: Cell) -> None:
         """ updates col_idx_min/max if cell is closer to top/bottom of grid"""
-        if Cell is None:
+        if cell is None:
             return
 
         if (self.row_idx_min <0) or (self.row_idx_min > cell.col_idx) :
@@ -61,4 +61,19 @@ class Cluster:
         if (self.row_idx_max <0) or (self.row_idx_max < cell.row_idx) :
             self.row_idx_max = cell.row_idx
 
-# -------------------------------
+    # -------------------------------
+    def merge(self, other: 'Cluster'):
+        """ merges other cluster into this cluster """
+
+        if (other is None) or (other is self):
+            return
+
+        # add cells from other cluster
+        for cell in other.cells:
+            self.add_cell(cell)
+
+        # reset other cluster
+        other.row_idx_min = -1  # the closer to 0, the closer to top of grid
+        other.row_idx_max = -1  # the closer to (grid.num_cols)-1, the closer to top of grid
+        other.grid = None
+        other.cells = set()
