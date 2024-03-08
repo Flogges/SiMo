@@ -119,16 +119,19 @@ class Grid:
 
         for cell_a in adjacent_cells:
             if cell_a.is_black:
-                cluster_a = cell_a.cluster
+                cluster_a  = cell_a.cluster
                 self.merge_clusters(cluster, cluster_a)
 
         ret= cluster.percolates()
         return ret
 
     # -------------------------------
-    def merge_clusters(self, cla: Cluster, clb: Cluster):
+    def merge_clusters(self, cla: Cluster, clb: Optional[Cluster]):
         """ merge any clusters.
          return whether true if percolation has occured in this step """
 
+        if clb is None:
+            return
+        
         cla.merge(clb)
         self.clusters.remove(clb)
