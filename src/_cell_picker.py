@@ -1,6 +1,4 @@
 
-
-
 import random
 from typing import List, Tuple
 
@@ -8,16 +6,12 @@ from typing import List, Tuple
 class CellPicker:
     """ Sequence of cells in (random) order from (num_rows x num_cols) sized grid"""
 
-    # ---------------------------------------------------------
-    num_rows:    int = -1
-    num_cols:    int = -1
-
     # -------------------------------
-    def __init__(self, num_rows, num_cols):
+    def __init__(self, num_rows: int, num_cols: int):
         """ order of indices: (row_idx, col_idx) -not- (col_idx, row_idx)~(x,y)
            same convention as numpy/pandas """
-        self.num_rows = num_rows
-        self.num_cols = num_cols
+        self.num_rows: int = num_rows
+        self.num_cols: int = num_cols
 
     # -------------------------------
     def seq_random(self, deterministic=False) -> List[Tuple[int,int]]:

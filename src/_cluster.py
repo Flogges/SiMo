@@ -1,32 +1,29 @@
-# from ._cell import Cell
+from __future__ import annotations
 
 from typing import Set
-from typing import Optional
-from ._cell import Cell
-
 
 # keep mypy happy, without actually importing (and thereby creating circular dependency  cluster <-> cell)
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
         from ._grid import Grid
+        from ._cell import Cell
 
 
 class Cluster:
     """ Full islands (not subsets thereof) of black cells """
 
-    # ---------------------------------------------------------
 
-    cells : Set[Cell] = set()   # using set (instead of eg List) stops duplicates from being added (by mistake)
-
-
-    # used to tell if cluster percolates
-    row_idx_min: int = -1  # the closer to 0, the closer to top of grid
-    row_idx_max: int = -1  # the closer to (grid.num_cols)-1, the closer to top of grid
-    grid: 'Optional[Grid]' = None
 
     # -------------------------------
-    def __init__(self, grid: 'Grid'):
+    def __init__(self, grid: Grid):
         self.grid = grid
+
+        self.cells: Set[Cell] = set()  # using set (instead of eg List) stops duplicates from being added (by mistake)
+
+        # used to tell if cluster percolates
+        self.row_idx_min: int = -1  # the closer to 0, the closer to top of grid
+        self.row_idx_max: int = -1  # the closer to (grid.num_cols)-1, the closer to top of grid
+
 
     # -------------------------------
     def num_cells(self) -> int:
@@ -62,7 +59,7 @@ class Cluster:
             self.row_idx_max = cell.row_idx
 
     # -------------------------------
-    def merge(self, other: 'Cluster'):
+    def merge(self, other: Cluster):
         """ merges other cluster into this cluster """
 
         if (other is None) or (other is self):

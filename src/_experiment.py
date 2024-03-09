@@ -1,4 +1,4 @@
-from ._grid import Grid
+
 from ._stepper import Stepper
 from ._cell_picker import CellPicker
 from ._grid_visual import visualize_grid_clusters, visualize_grid_sequence

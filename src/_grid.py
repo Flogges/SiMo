@@ -1,41 +1,45 @@
+from __future__ import annotations
+
 from ._cell import Cell
 from ._cluster import Cluster
-from typing import List, Tuple, Set
-from typing import Optional
+from typing import List, Tuple, Set, Optional
+
 
 Row = List[Cell]  # Alias for List (so we can use eg "List[Row]"  instead of "List[List[Cell]]" )
 
 class Grid:
     """  Matrix of size (rows x cols) cells """
 
-    # ---------------------------------------------------------
-    num_rows: int = -1
-    num_cols: int = -1
-
-    clusters:   Set[Cluster] = set()
-    rows:       List[Row] = []
-
-    steps_taken = 0
-    # ----------------------------
-    # if/when percolation occurs, save the cluster responsible, and cell in it that last turned black
-    perc_cluster: Optional[Cluster] = None
-    perc_cell: Optional[Cell] = None
-
     # -------------------------------
-    def perc_value(self):
-        return float(self.steps_taken)/(float(self.num_cols * self.num_rows))
-    # -------------------------------
-    def __init__(self, num_rows, num_cols):
+    def __init__(self, num_rows: int, num_cols: int):
+
         self.num_rows = num_rows
         self.num_cols = num_cols
 
-        for row_idx in range(num_rows):
+        self.rows: List[Row] = []
+        self.clusters: Set[Cluster] = set()
+        self.steps_taken = 0
+        # ----------------------------
+        # if/when percolation occurs, save the cluster responsible, and cell in it that last turned black
+        self.perc_cluster: Optional[Cluster] = None
+        self.perc_cell: Optional[Cell] = None
+        # ----------------------------
+
+        self.init_cells()
+
+    # -------------------------------
+    def init_cells(self):
+        self.rows = []  # in case called more than once
+
+        for row_idx in range(self.num_rows):
             row = list()
-            for col_idx in range(num_cols):
-                cell = Cell(col_idx, row_idx, is_black=False, grid=self)
+            for col_idx in range(self.num_cols):
+                cell = Cell(row_idx=row_idx, col_idx=col_idx, is_black=False, grid=self)
                 row.append(cell)
             self.rows.append(row)
-
+    # -------------------------------
+    def perc_value(self):
+        return float(self.steps_taken)/(float(self.num_cols * self.num_rows))
     # -------------------------------
     @classmethod
     def indices_adjacent_to(Cls, num_rows: int, num_cols: int, row_idx: int, col_idx: int) -> Optional[List[Tuple[int,int]]]:

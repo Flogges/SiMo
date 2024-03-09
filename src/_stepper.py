@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from ._grid import Grid
 from typing import List, Tuple, Optional
 
