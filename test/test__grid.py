@@ -33,21 +33,17 @@ def test_adjacent_cells_multiple():
     num_cols = 6
 
     # Test: Corner case (Top-Left corner)
-    __test_adjacent_cells(num_rows=num_rows, num_cols=num_cols,  row_idx=0, col_idx=0, expected_adj= [(0, 1), (1, 0), (1, 1)], mesg="Top-Left corner failed")
+    __test_adjacent_cells(num_rows=num_rows, num_cols=num_cols,  row_idx=0, col_idx=0, expected_adj= [(0, 1), (1, 0),], mesg="Top-Left corner failed")
 
     # Test: Corner case (Bottom-Right corner)
-    __test_adjacent_cells(num_rows=num_rows, num_cols=num_cols, row_idx=4, col_idx=5, expected_adj=[(3, 4), (3, 5), (4, 4)], mesg = "Bottom-Right corner failed")
+    __test_adjacent_cells(num_rows=num_rows, num_cols=num_cols, row_idx=4, col_idx=5, expected_adj=[ (3, 5), (4, 4)], mesg = "Bottom-Right corner failed")
 
     # Test: Edge case (Top edge, not corner)
-    assert Grid.indices_adjacent_to(num_rows, num_cols, 0, 2) == [(0, 1), (0, 3), (1, 1), (1, 2), (1, 3)], "Top edge failed"
-    __test_adjacent_cells(num_rows=num_rows, num_cols=num_cols, row_idx=0, col_idx=2, expected_adj=[(0, 1), (0, 3), (1, 1), (1, 2), (1, 3)], mesg = "Top edge failed")
+    assert Grid.indices_adjacent_to(num_rows, num_cols, 0, 2) == [(0, 1), (0, 3), (1, 2)], "Top edge failed"
+    __test_adjacent_cells(num_rows=num_rows, num_cols=num_cols, row_idx=0, col_idx=2, expected_adj=[(0, 1), (0, 3), (1, 2)], mesg = "Top edge failed")
 
     # Test: Edge case (Left edge, not corner)
-    __test_adjacent_cells(num_rows=num_rows, num_cols=num_cols, row_idx=2, col_idx=0, expected_adj=[(1, 0), (1, 1), (2, 1), (3, 0), (3, 1)], mesg = "Left edge failed")
+    __test_adjacent_cells(num_rows=num_rows, num_cols=num_cols, row_idx=2, col_idx=0, expected_adj=[(1, 0), (2, 1), (3, 0)], mesg = "Left edge failed")
 
     # Test: Center (Not an edge or corner)
-    __test_adjacent_cells(num_rows, num_cols, row_idx=2, col_idx=2, expected_adj = [
-        (1, 1), (1, 2), (1, 3),
-        (2, 1), (2, 3),
-        (3, 1), (3, 2), (3, 3)
-    ], mesg= "Center failed")
+    __test_adjacent_cells(num_rows, num_cols, row_idx=2, col_idx=2, expected_adj = [(1, 2), (2, 1), (2, 3), (3, 2)], mesg= "Center failed")

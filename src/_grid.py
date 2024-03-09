@@ -42,10 +42,16 @@ class Grid:
         """ return list of cells adjacent to given cell (row_idx, col_idx) in grid of size (num_rows x num_cols) """
 
 
+        # deltas = [
+        #     (-1, -1), (-1, 0), (-1, 1),  # Above row
+        #     (0, -1), (0, 1),  # Same row
+        #     (1, -1), (1, 0), (1, 1)  # Below row
+        # ]
+
         deltas = [
-            (-1, -1), (-1, 0), (-1, 1),  # Above row
+             (-1, 0),  # Above row
             (0, -1), (0, 1),  # Same row
-            (1, -1), (1, 0), (1, 1)  # Below row
+            (1, 0),  # Below row
         ]
 
         ret = []

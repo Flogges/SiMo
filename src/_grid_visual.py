@@ -7,7 +7,7 @@ from typing import List, Tuple
 from src._grid import Grid
 from src._cell import Cell
 # -------------------------------------
-def visualize_grid_sequence(num_rows, num_cols, sequence):
+def visualize_grid_sequence(num_rows: int, num_cols: int, sequence: List[Tuple[int,int]]):
     """
     Visualizes the order of cells in the sequence, using a color map.
     """
@@ -27,6 +27,14 @@ def visualize_grid_sequence(num_rows, num_cols, sequence):
 
     # Plot the grid
     plt.imshow(normalized, cmap=colormap, interpolation='nearest')
+
+    # Loop to overlay sequence numbers
+    for order, (row, col) in enumerate(sequence):
+        # Use plt.text() to put the sequence number in each cell
+        # Adjust the text color ("black" or "white") based on the cell's background color for readability
+        text_color = "white" if normalized[row, col] < 0.5 else "black"
+        plt.text(col, row, str(order), color=text_color, ha="center", va="center")
+
 
     # Optionally, add a colorbar to indicate the sequence order
     plt.colorbar(label='Sequence Order')
