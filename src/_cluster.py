@@ -45,6 +45,7 @@ class Cluster:
         if (cell is not None) and (cell.is_black):
             self.cells.add(cell)
             self.update_col_idx(cell)
+            cell.cluster = self
 
     # -------------------------------
     def update_col_idx(self, cell: Cell) -> None:
@@ -52,8 +53,8 @@ class Cluster:
         if cell is None:
             return
 
-        if (self.row_idx_min <0) or (self.row_idx_min > cell.col_idx) :
-            self.row_idx_min = cell.col_idx
+        if (self.row_idx_min <0) or (self.row_idx_min > cell.row_idx) :
+            self.row_idx_min = cell.row_idx
 
         if (self.row_idx_max <0) or (self.row_idx_max < cell.row_idx) :
             self.row_idx_max = cell.row_idx

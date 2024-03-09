@@ -126,6 +126,7 @@ class Grid:
         cell.turn_black()
         cluster = Cluster(grid=self)
         cluster.add_cell(cell)
+        cell.cluster = cluster
         self.clusters.add(cluster)
 
 
@@ -148,11 +149,13 @@ class Grid:
     # -------------------------------
     def merge_clusters(self, cla: Cluster, clb: Optional[Cluster]):
         """ merge any clusters.
-         return whether true if percolation has occured in this step """
+         return whether true if percolation has occurred in this step """
 
-        if clb is None:
+        if (clb is None) or (cla is clb):
             return
 
         cla.merge(clb)
+        if (not clb in self.clusters):
+            halt = 1
         self.clusters.remove(clb)
         halt=1
