@@ -6,6 +6,7 @@ from typing import List, Tuple
 class CellPicker:
     """ Sequence of cells in (random) order from (num_rows x num_cols) sized grid"""
 
+
     # -------------------------------
     def __init__(self, num_rows: int, num_cols: int):
         """ order of indices: (row_idx, col_idx) -not- (col_idx, row_idx)~(x,y)
