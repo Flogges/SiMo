@@ -57,4 +57,4 @@ if __name__ == "__main__":
 
     print(f"...average p: {res.p_av} with ({num_rows}x{num_cols}) grid, {batch_size} iterations in {res.time_delta} secs ")
 
-    visualize_as_histogram(res.ps)
+    visualize_as_histogram(res.ps, x_label="p", title= f"Percolation in {batch_size} ({num_rows}x{num_cols}) grids")
