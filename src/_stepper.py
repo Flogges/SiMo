@@ -29,7 +29,7 @@ class Stepper:
                 cluster = self.grid.perc_cluster
                 cell = self.grid.perc_cell
                 steps = self.grid.steps_taken
-                print(f"Percolated at step {steps} of {self.num_rows * self.num_cols} in cluster {cluster} at cell {cell}")
+                # print(f"Percolated at step {steps} of {self.num_rows * self.num_cols} in cluster {cluster} at cell {cell}")
                 return True
 
         print(f"No Percolation occurred ...")
