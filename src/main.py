@@ -2,13 +2,28 @@
 from src._experiment import Experiment
 from typing import List
 import time
+from src._grid_visual import visualize_as_histogram
+
+from dataclasses import dataclass
 
 # --------------------------------------------
-def calculate_p_av(num_rows: int = 30, num_cols: int =30, batch_size: int = 30 ) -> float :
+@dataclass
+class PercResult:
+    """ Encapsulates all data in calculation """
+    # in:
+    num_cols:   float
+    num_rows:   float
+    batch_size: int
 
+    # out:
+    ps: List[float]         # p-values
+    p_av:   float           # average p-value
+    time_delta: float       # num of secs required to perform calculation
 
+# --------------------------------------------
+def calculate_p_av(num_rows: int = 30, num_cols: int =30, batch_size: int = 30 ) -> PercResult :
     """
-    :return:            average proportion of grid cells that must be turned on before percolation occurs
+    :return:            PercResult with ps, p_av, time_delta calculated
 
 
     :param num_rows:    height of grid
@@ -27,8 +42,19 @@ def calculate_p_av(num_rows: int = 30, num_cols: int =30, batch_size: int = 30 )
     t1 = time.time()
 
     time_delta = t1 - t0
-    print(f"...average p: {p_av} with ({num_rows}x{num_cols}) grid, {batch_size} iterations in {round(time_delta,2)} secs ")
-    return p_av
-# --------------------------------------------
-if __name__ == "__main__" :
-    calculate_p_av(num_rows=50, num_cols=50, batch_size=50)
+
+
+    result =  PercResult(num_rows=num_rows, num_cols=num_cols, batch_size=batch_size, ps=ps, p_av=p_av, time_delta=round(time_delta,2))
+    return result
+# ------------------------------------------------------------------
+if __name__ == "__main__":
+
+    num_rows = 100
+    num_cols = 100
+    batch_size= 300
+
+    res = calculate_p_av(num_rows=num_rows, num_cols=num_cols, batch_size=batch_size)
+
+    print(f"...average p: {res.p_av} with ({num_rows}x{num_cols}) grid, {batch_size} iterations in {res.time_delta} secs ")
+
+    visualize_as_histogram(res.ps)

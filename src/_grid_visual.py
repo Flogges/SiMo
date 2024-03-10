@@ -111,3 +111,14 @@ def visualize_grid_clusters(grid: Grid):
 
         plt.axis('off')
         plt.show()
+# -------------------------
+def visualize_as_histogram(ps:List[float]):
+    counts, bins = np.histogram(ps)
+    #plt.stairs(counts, bins)
+
+    plt.hist(ps, bins='auto')
+    #plt.hist(ps, bins=100)  # 'auto' lets matplotlib decide the number of bins
+    plt.title('Histogram of p values')
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    plt.show()
